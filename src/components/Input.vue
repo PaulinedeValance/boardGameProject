@@ -20,6 +20,6 @@ defineProps<{
 .input-home {
     padding: 5px;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 19px;
 }
 </style>

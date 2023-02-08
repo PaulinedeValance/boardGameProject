@@ -21,7 +21,7 @@ const logger = () => {
 
 <style scoped>
 h1 {
-  font-size: 19px;
+  font-size: 22px;
   padding-left: 20px;
   padding-top: 20px;
   color: #1e4975;
