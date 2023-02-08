@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 </script>
 
 <template>
@@ -18,7 +18,6 @@
     background-color: rgba(207, 205, 205, 0.289);
     display: flex;
     align-items: center;
-
 }
 
 .logo {
@@ -29,7 +28,7 @@
     display: flex;
     gap: 50px;
     font-size: 21px;
-    color: black;
+    color: #1e4975;
 }
 
 .navbar-link {
@@ -38,7 +37,7 @@
 
 a {
     text-decoration: none;
-    color: #1f1e5a;
+    color: #1e4975;
 }
 
 a:hover {
