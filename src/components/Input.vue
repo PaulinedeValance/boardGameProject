@@ -12,7 +12,8 @@ defineProps<{
 
 <template>
     <input class="input-home" type="text" :placeholder="placeholder" :value="modelValue"
-        @input="$emit('update:modelValue')" />
+        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" />
+    <!-- <p>{{ modelValue }}</p> -->
 </template>
 
 <style scoped>

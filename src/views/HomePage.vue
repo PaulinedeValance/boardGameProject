@@ -5,15 +5,17 @@ import Input from "../components/Input.vue"
 import Button from "../components/Button.vue"
 
 const newGame = ref<string>('')
+const logger = () => {
+  console.log(newGame.value)
+}
+
 </script>
 
 <template>
   <h1>Rechercher un jeu</h1>
 
   <Input v-model="newGame" :placeholder="'Recherchez un jeu'" />
-
-  <Button />
-  <p>{{ newGame }}</p>
+  <Button @display-text="logger" />
 
 </template>
 
