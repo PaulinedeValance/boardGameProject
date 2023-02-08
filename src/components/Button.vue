@@ -1,9 +1,11 @@
 <script setup lang="ts">
-
+defineProps<{
+    name: string
+}>()
 </script>
 
 <template>
-    <button class="btn-validate" @click="$emit('displayText')">Valider</button>
+    <button class="btn-validate" @click="$emit('clicked')">{{ name }}</button>
 </template>
 
 
@@ -21,9 +23,6 @@
     border-radius: 50px;
     transition: 1000ms;
     transform: translateY(0);
-    /* display: flex;
-    flex-direction: row;
-    align-items: center; */
     cursor: pointer;
     text-transform: lowercase;
 }
