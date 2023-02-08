@@ -11,15 +11,14 @@ const deleteSpace = ref<string>('')
 
 const logger = () => {
   console.log(newGame.value);
-
 }
+
 const clearInput = () => {
   return eraseText.value = '';
-
 }
+
 const transformToUpperCase = () => {
   newText.value = newText.value.toUpperCase()
-
 }
 
 const deleteSpaceInput = () => {
