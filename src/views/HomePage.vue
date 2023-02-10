@@ -2,9 +2,11 @@
 import { ref } from 'vue';
 import Input from "../components/Input.vue"
 import Button from "../components/Button.vue"
+import Game from "../components/Game.vue"
 import { useAxios } from '@vueuse/integrations/useAxios'
 
-interface Game {
+export interface Game {
+
   handle: string
   name: string;
   image_url: string
@@ -15,33 +17,47 @@ const searchedGame = ref<string>('')
 const gamesList = ref<Game[]>([])
 
 const getData = async () => {
-
+  if (searchedGame.value === "") {
+    alert("Please, enter a game")
+    return
+  }
   const { data } = await useAxios(`https://api.boardgameatlas.com/api/search?name=${searchedGame.value}&fuzzy_match=true&client_id=JLBr5npPhV`)
 
   const games = data.value.games.map((game: Game) => ({ name: game.handle, image: game.image_url }))
   gamesList.value = games
 }
-//getData()
 
 </script>
 
 <template>
   <h1>Rechercher un jeu</h1>
 
-
   <div>
     <Input v-model="searchedGame" :placeholder="'Recherchez un jeu'" />
     <Button @clicked="getData()" :name="'Valider'" />
 
-    <div v-for="game in gamesList" :key="game.handle">{{ game.name }} <img class="img-api" :src="game.image" />
+    <div class="container-flex">
+      <div class="container-game" v-for="game in gamesList" :key="game.handle">
+        <Game :game="game" />
+
+      </div>
     </div>
   </div>
 
 </template>
 
 <style scoped>
-.img-api {
-  width: 20%;
+.container-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.container-game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 h1 {
