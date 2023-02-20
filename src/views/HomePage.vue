@@ -18,8 +18,8 @@ export interface Game {
 const searchedGame = ref<string>('')
 // store the list of games
 const gamesList = ref<Game[]>([])
-const errorMessage = ref('')
-const notFoundGame = ref('')
+const errorMessage = ref<string>('')
+const notFoundGame = ref<string>('')
 
 // fetch the api with an async function
 const getData = async () => {
