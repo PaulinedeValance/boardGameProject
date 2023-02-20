@@ -19,6 +19,7 @@ const searchedGame = ref<string>('')
 // store the list of games
 const gamesList = ref<Game[]>([])
 const errorMessage = ref('')
+const notFoundGame = ref('')
 
 // fetch the api with an async function
 const getData = async () => {
@@ -34,6 +35,11 @@ const getData = async () => {
   gamesList.value = games;
   // clear the input value after the button is clicked
   searchedGame.value = ''
+
+  if (gamesList.value.length === 0) {
+    notFoundGame.value = "Désolé, ce jeu n'existe pas"
+
+  }
 }
 
 </script>
@@ -42,9 +48,11 @@ const getData = async () => {
   <h1>Rechercher un jeu</h1>
 
   <div>
-    <Input v-model="searchedGame" :placeholder="'Recherchez un jeu'" />
+    <Input v-model="searchedGame" :placeholder="'Recherchez un jeu'" @keyup.enter="getData()" />
     <Button @clicked="getData()" :name="'Valider'" />
     <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
+    <p class="notfound-message" v-if="notFoundGame">{{ notFoundGame }}</p>
+
 
     <div class="container-flex">
       <div class="container-game" v-for="game in gamesList" :key="game.id">
@@ -88,6 +96,13 @@ h1 {
   padding-left: 32px;
   padding-top: 4px;
   margin: 0;
+}
 
+.notfound-message {
+  font-size: 22px;
+  font-family: 'Didact Gothic', sans-serif;
+  color: #1e4975;
+  padding-top: 20px;
+  padding-left: 30px;
 }
 </style>
