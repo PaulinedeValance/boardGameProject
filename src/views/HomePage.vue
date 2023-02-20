@@ -49,15 +49,19 @@ const getData = async () => {
 <style scoped>
 .container-flex {
   display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-top: 50px;
+  margin: 0 auto;
 }
 
 .container-game {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 50px;
 }
 
 h1 {
