@@ -69,7 +69,6 @@ const getData = async () => {
 <style scoped>
 .container-flex {
   display: flex;
-  justify-content: space-between;
   max-width: 1200px;
   flex-direction: row;
   flex-wrap: wrap;
