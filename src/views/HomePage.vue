@@ -11,6 +11,7 @@ export interface Game {
   name: string;
   image_url: string
   image: string
+  id: string
 }
 
 // store the value of the search input
@@ -28,7 +29,7 @@ const getData = async () => {
   const { data } = await useAxios(`https://api.boardgameatlas.com/api/search?name=${searchedGame.value}&fuzzy_match=true&client_id=JLBr5npPhV`)
 
   // map over the datas and keep the games name and images url
-  const games = data.value.games.map((game: Game) => ({ name: game.handle, image: game.image_url }))
+  const games = data.value.games.map((game: Game) => ({ name: game.handle, image: game.image_url, id: game.id }))
   // update the gamesList with the list of games 
   gamesList.value = games;
   // clear the input value after the button is clicked
@@ -46,7 +47,7 @@ const getData = async () => {
     <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
 
     <div class="container-flex">
-      <div class="container-game" v-for="game in gamesList" :key="game.handle">
+      <div class="container-game" v-for="game in gamesList" :key="game.id">
         <Game :game="game" />
 
       </div>
