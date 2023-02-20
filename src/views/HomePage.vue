@@ -23,6 +23,7 @@ const notFoundGame = ref<string>('')
 
 // fetch the api with an async function
 const getData = async () => {
+  errorMessage.value = ""
   if (searchedGame.value === "") {
     errorMessage.value = "Please enter a game"
     return
@@ -36,6 +37,7 @@ const getData = async () => {
   // clear the input value after the button is clicked
   searchedGame.value = ''
 
+  notFoundGame.value = ""
   if (gamesList.value.length === 0) {
     notFoundGame.value = "Désolé, ce jeu n'existe pas"
 
