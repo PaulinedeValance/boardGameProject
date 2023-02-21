@@ -1,11 +1,18 @@
 <script setup lang="ts">
 defineProps<{
-    name: string
+    name?: string
+    heartIcon?: string
 }>()
 </script>
 
 <template>
-    <button class="btn-validate" @click="$emit('clicked')">{{ name }}</button>
+    <button class="btn-validate" @click="$emit('clicked')">
+
+        <img v-if="heartIcon" :src="'/heart.png'" alt="Button Icon" />
+        <div v-else>
+            {{ name }}
+        </div>
+    </button>
 </template>
 
 

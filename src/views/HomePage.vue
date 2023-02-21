@@ -21,6 +21,9 @@ const gamesList = ref<Game[]>([])
 const errorMessage = ref<string>('')
 const notFoundGame = ref<string>('')
 
+const heartIcon = 'heart.png'
+//const heartIcon = 'src/assets/heart.png'
+
 // fetch the api with an async function
 const getData = async () => {
   errorMessage.value = ""
@@ -44,6 +47,11 @@ const getData = async () => {
   }
 }
 
+const buttonFavorite = () => {
+  console.log("cliqué");
+
+}
+
 </script>
 
 <template>
@@ -55,14 +63,15 @@ const getData = async () => {
     <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
     <p class="notfound-message" v-if="notFoundGame">{{ notFoundGame }}</p>
 
-
     <div class="container-flex">
       <div class="container-game" v-for="game in gamesList" :key="game.id">
         <Game :game="game" />
-
       </div>
     </div>
   </div>
+
+  <!-- <Button class="favoris-button" @clicked="buttonFavorite()" :name="''" :heart-icon="'heartIcon'" /> -->
+  <Button class="favoris-button" @clicked="buttonFavorite()" :heart-icon="heartIcon" />
 
 </template>
 
@@ -105,5 +114,12 @@ h1 {
   color: #1e4975;
   padding-top: 20px;
   padding-left: 30px;
+}
+
+.favoris-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 20%;
 }
 </style>
