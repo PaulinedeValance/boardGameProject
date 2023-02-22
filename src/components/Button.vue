@@ -6,9 +6,8 @@ defineProps<{
 </script>
 
 <template>
-    <button class="btn-validate" @click="$emit('clicked')">
-
-        <img v-if="heartIcon" :src="'/heart.png'" alt="Button Icon" />
+    <button @click="$emit('clicked')">
+        <img class="icon-favoris-empty" v-if="heartIcon" :src="'/heart.png'" alt="Button Icon" />
         <div v-else>
             {{ name }}
         </div>
@@ -31,16 +30,19 @@ defineProps<{
     transition: 1000ms;
     transform: translateY(0);
     cursor: pointer;
-    text-transform: lowercase;
 }
 
 .btn-validate:hover {
-
     transition: 1000ms;
     padding: 7px 30px;
     transform: translateY(-0px);
     background-color: #fff;
     color: #1e4975;
     border: solid 2px #1e4975;
+}
+
+.icon-favoris-empty {
+    width: 40%;
+    filter: opacity(0.3) drop-shadow(0 0 0 crimson);
 }
 </style>

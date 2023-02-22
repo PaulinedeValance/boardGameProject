@@ -4,6 +4,7 @@ import Input from "../components/Input.vue"
 import Button from "../components/Button.vue"
 import Game from "../components/Game.vue"
 import { useAxios } from '@vueuse/integrations/useAxios'
+import { computed } from 'vue'
 
 export interface Game {
 
@@ -21,8 +22,9 @@ const gamesList = ref<Game[]>([])
 const errorMessage = ref<string>('')
 const notFoundGame = ref<string>('')
 
-const heartIcon = 'heart.png'
-//const heartIcon = 'src/assets/heart.png'
+const emptyHeartIcon = 'heart.png'
+const filledHeartIcon = 'filled-heart'
+const isLiked = ref<boolean>(false)
 
 // fetch the api with an async function
 const getData = async () => {
@@ -43,14 +45,36 @@ const getData = async () => {
   notFoundGame.value = ""
   if (gamesList.value.length === 0) {
     notFoundGame.value = "Désolé, ce jeu n'existe pas"
-
   }
 }
 
-const buttonFavorite = () => {
+const buttonToggleHeart = () => {
+  isLiked.value = !isLiked.value
   console.log("cliqué");
-
 }
+
+const iconClass = computed(() => {
+  if (isLiked.value) {
+    return 'fas fa-heart';
+  } else {
+    return 'far fa-heart';
+  }
+});
+
+return {
+  buttonToggleHeart,
+  iconClass
+}
+
+
+const iconHeart = computed(() => {
+  if (isLiked.value) {
+    return emptyHeartIcon
+
+  } else {
+    return filledHeartIcon
+  }
+})
 
 </script>
 
@@ -59,7 +83,7 @@ const buttonFavorite = () => {
 
   <div>
     <Input v-model="searchedGame" :placeholder="'Recherchez un jeu'" @keyup.enter="getData()" />
-    <Button @clicked="getData()" :name="'Valider'" />
+    <Button class="btn-validate" @clicked="getData()" :name="'Valider'" />
     <p class="error-message" v-if="errorMessage">{{ errorMessage }}</p>
     <p class="notfound-message" v-if="notFoundGame">{{ notFoundGame }}</p>
 
@@ -70,9 +94,7 @@ const buttonFavorite = () => {
     </div>
   </div>
 
-  <!-- <Button class="favoris-button" @clicked="buttonFavorite()" :name="''" :heart-icon="'heartIcon'" /> -->
-  <Button class="favoris-button" @clicked="buttonFavorite()" :heart-icon="heartIcon" />
-
+  <Button class="favoris-button" @clicked="buttonToggleHeart()" :heart-icon="emptyHeartIcon" />
 </template>
 
 <style scoped>
@@ -120,6 +142,6 @@ h1 {
   background: transparent;
   border: none;
   cursor: pointer;
-  width: 20%;
+  width: 10%;
 }
 </style>
