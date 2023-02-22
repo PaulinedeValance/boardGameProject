@@ -23,7 +23,7 @@ const errorMessage = ref<string>('')
 const notFoundGame = ref<string>('')
 
 const emptyHeartIcon = 'heart.png'
-const filledHeartIcon = 'filled-heart'
+const filledHeartIcon = 'filled-heart.png'
 const isLiked = ref<boolean>(false)
 
 // fetch the api with an async function
@@ -47,34 +47,20 @@ const getData = async () => {
     notFoundGame.value = "Désolé, ce jeu n'existe pas"
   }
 }
-
+// This function toggle isLiked when the button is clicked
 const buttonToggleHeart = () => {
   isLiked.value = !isLiked.value
-  console.log("cliqué");
+  //console.log("cliqué");
 }
 
-const iconClass = computed(() => {
+// if isLiked is true, return the empty heart, else return the filled heart image
+const iconImage = computed(() => {
   if (isLiked.value) {
-    return 'fas fa-heart';
+    return emptyHeartIcon;
   } else {
-    return 'far fa-heart';
+    return filledHeartIcon;
   }
 });
-
-return {
-  buttonToggleHeart,
-  iconClass
-}
-
-
-const iconHeart = computed(() => {
-  if (isLiked.value) {
-    return emptyHeartIcon
-
-  } else {
-    return filledHeartIcon
-  }
-})
 
 </script>
 
@@ -94,7 +80,7 @@ const iconHeart = computed(() => {
     </div>
   </div>
 
-  <Button class="favoris-button" @clicked="buttonToggleHeart()" :heart-icon="emptyHeartIcon" />
+  <Button :icon="iconImage" @clicked="buttonToggleHeart()" :heart-icon="emptyHeartIcon" />
 </template>
 
 <style scoped>

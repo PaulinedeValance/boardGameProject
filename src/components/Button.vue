@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps<{
     name?: string
-    heartIcon?: string
+    icon?: string
 }>()
 </script>
 
 <template>
     <button @click="$emit('clicked')">
-        <img class="icon-favoris-empty" v-if="heartIcon" :src="'/heart.png'" alt="Button Icon" />
+        <img class="icon-favoris-empty" v-if="icon" :src="icon" alt="Button Icon" />
         <div v-else>
             {{ name }}
         </div>
