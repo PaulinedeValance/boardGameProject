@@ -77,10 +77,9 @@ const iconImage = computed(() => {
       <div class="container-game" v-for="game in gamesList" :key="game.id">
         <Game :game="game" />
       </div>
+      <Button class="favoris-button" :icon="iconImage" @clicked="buttonToggleHeart()" :heart-icon="emptyHeartIcon" />
     </div>
   </div>
-
-  <Button :icon="iconImage" @clicked="buttonToggleHeart()" :heart-icon="emptyHeartIcon" />
 </template>
 
 <style scoped>

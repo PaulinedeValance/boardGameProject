@@ -42,7 +42,8 @@ defineProps<{
 }
 
 .icon-favoris-empty {
-    width: 40%;
-    filter: opacity(0.3) drop-shadow(0 0 0 crimson);
+    width: 25%;
+    filter: invert(16%) sepia(99%) saturate(7404%) hue-rotate(16deg) brightness(95%) contrast(118%);
+    /* filter: opacity(0.7) drop-shadow(0 0 0 crimson); */
 }
 </style>
