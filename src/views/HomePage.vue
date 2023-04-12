@@ -3,28 +3,20 @@ import { ref } from 'vue';
 import Input from "../components/Input.vue"
 import Button from "../components/Button.vue"
 import Game from "../components/Game.vue"
+import Modal from "../components/Modal.vue"
 import { useAxios } from '@vueuse/integrations/useAxios'
-import { computed } from 'vue'
+import type { Games } from "../types"
 
-export interface Game {
-
-  handle: string
-  name: string;
-  image_url: string
-  image: string
-  id: string
-}
 
 // store the value of the search input
 const searchedGame = ref<string>('')
 // store the list of games
-const gamesList = ref<Game[]>([])
+const gamesList = ref<Games[]>([])
 const errorMessage = ref<string>('')
 const notFoundGame = ref<string>('')
 
-const emptyHeartIcon = 'heart.png'
-const filledHeartIcon = 'filled-heart.png'
-const isLiked = ref<boolean>(false)
+//const isLiked = ref<boolean>(false)
+//const open = ref<boolean>(false)
 
 // fetch the api with an async function
 const getData = async () => {
@@ -33,10 +25,10 @@ const getData = async () => {
     errorMessage.value = "Please enter a game"
     return
   }
-  const { data } = await useAxios(`https://api.boardgameatlas.com/api/search?name=${searchedGame.value}&fuzzy_match=true&client_id=JLBr5npPhV`)
+  const { data } = await useAxios(`https://api.boardgameatlas.com/api/search?name=${searchedGame.value}&fuzzy_match=true&client_id=${import.meta.env.VITE_API_KEY}`)
 
   // map over the datas and keep the games name and images url
-  const games = data.value.games.map((game: Game) => ({ name: game.handle, image: game.image_url, id: game.id }))
+  const games = data.value.games.map((game: Games) => ({ name: game.name, image: game.image_url, id: game.id }))
   // update the gamesList with the list of games 
   gamesList.value = games;
   // clear the input value after the button is clicked
@@ -47,20 +39,10 @@ const getData = async () => {
     notFoundGame.value = "Désolé, ce jeu n'existe pas"
   }
 }
-// This function toggle isLiked when the button is clicked
-const buttonToggleHeart = () => {
-  isLiked.value = !isLiked.value
-  //console.log("cliqué");
-}
 
-// if isLiked is true, return the empty heart, else return the filled heart image
-const iconImage = computed(() => {
-  if (isLiked.value) {
-    return emptyHeartIcon;
-  } else {
-    return filledHeartIcon;
-  }
-});
+// const closeModal = () => {
+//   open.value = false
+// }
 
 </script>
 
@@ -77,9 +59,10 @@ const iconImage = computed(() => {
       <div class="container-game" v-for="game in gamesList" :key="game.id">
         <Game :game="game" />
       </div>
-      <Button class="favoris-button" :icon="iconImage" @clicked="buttonToggleHeart()" :heart-icon="emptyHeartIcon" />
     </div>
   </div>
+
+  <!-- <Modal v-model="open" @closed="closeModal" /> -->
 </template>
 
 <style scoped>
@@ -121,12 +104,5 @@ h1 {
   color: #1e4975;
   padding-top: 20px;
   padding-left: 30px;
-}
-
-.favoris-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  width: 10%;
 }
 </style>

@@ -42,7 +42,7 @@ defineProps<{
 }
 
 .icon-favoris-empty {
-    width: 25%;
+    max-width: 20%;
     filter: invert(16%) sepia(99%) saturate(7404%) hue-rotate(16deg) brightness(95%) contrast(118%);
     /* filter: opacity(0.7) drop-shadow(0 0 0 crimson); */
 }
